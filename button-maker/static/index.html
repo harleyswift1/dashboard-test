@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Swift - Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <script type="text/javascript" src="script.js"></script>
+    <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+</head>
+<body>
+
+<img alt="logo" class="logo" src="logo.png">
+<div class="sidebar-separator"></div>
+<div class="sidebar">
+    <div class="sidebar-links-div">
+        <div class="sidebar-link sidebar-link-selected">
+            <img alt="icon" class="sidebar-link-icon" src="icon1.png"><span class="sidebar-link-text">Home</span>
+        </div>
+        <div class="sidebar-link">
+            <img alt="icon" class="sidebar-link-icon" src="icon2.png"><span class="sidebar-link-text">Market</span>
+        </div>
+        <div class="sidebar-link">
+            <img alt="icon" class="sidebar-link-icon" src="icon3.png"><span class="sidebar-link-text">Portfolio</span>
+        </div>
+        <div class="sidebar-link">
+            <img alt="icon" class="sidebar-link-icon" src="icon4.png"><span class="sidebar-link-text">About</span>
+        </div>
+        <div class="sidebar-link">
+            <img alt="icon" class="sidebar-link-icon" src="icon5.png"><span class="sidebar-link-text">Watchlist</span>
+        </div>
+    </div>
+</div>
+<div class="total-balance-div">
+    <span class="total-balance-primary">$2,245,918.56</span>
+    <span class="total-balance-secondary">+2.37%</span>
+</div>
+<div class="page-title-div">
+    <span>Dashboard</span>
+</div>
+
+<div class="main">
+    <div class="triple-small-widget-div">
+        <div class="small-widget"><span class="widget-title">Daily Profit</span>
+            <br>
+            <span class="widget-value-primary">$245.61
+            <span class="widget-value-secondary positive">+2.37%</span></span>
+            <img alt="Refresh" onClick="refresh()" src="refresh.png" class="refresh-icon">
+        </div>
+        <div class="small-widget"><span class="widget-title">Weekly Profit</span>
+            <br>
+            <span class="widget-value-primary">$1,592.28
+            <span class="widget-value-secondary positive">+10.95%</span></span>
+            <img alt="Refresh" onClick="refresh()" src="refresh.png" class="refresh-icon">
+        </div>
+        <div class="small-widget"><span class="widget-title">All Time Profit</span>
+            <br>
+            <span class="widget-value-primary">$73,215.26
+            <span class="widget-value-secondary positive">+205.12%</span></span>
+            <img alt="Refresh" onClick="refresh()" src="refresh.png" class="refresh-icon">
+        </div>
+    </div>
+
+    <div class="today-div">
+        <canvas class="chart" id="chart"></canvas>
+        <div class="today-stats-div">
+
+            <div class="performing-asset-div">
+                <div style="margin-right: 50px" class="performing-asset">
+                    <span class="widget-title">Best Performer</span><br>
+                    <span class="widget-value-primary">Cardano
+            <span class="widget-value-secondary positive">+1.84%</span></span>
+                </div>
+                <div style="margin-right: 50px" class="performing-asset">
+                    <span class="widget-title">Worst Performer</span><br>
+                    <span class="widget-value-primary">Symbol
+            <span class="widget-value-secondary negative">-2.49%</span></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="asset-list-div">
+        <div class="asset-list-title-div">
+            <span style="font-size: 24px;">Your Assets <span class="asset-count">(9)</span></span>
+        </div>
+
+        <div style="overflow-x: auto;">
+            <table>
+                <tr>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>24h %</th>
+                    <th>7d %</th>
+                    <th>Holdings</th>
+                    <th>Market Cap</th>
+                </tr>
+                <tr>
+                    <td>Bitcoin <span class="ticker">BTC</span>
+                    <td>$66,129.83</td>
+                    <td class="positive">2.5%</td>
+                    <td class="positive">4.9%</td>
+                    <td>$30,000.00</td>
+                    <td>$1.59T</td>
+                </tr>
+                <tr>
+                    <td>Ethereum <span class="ticker">ETH</span>
+                    <td>$4,182.11</td>
+                    <td class="positive">1.2%</td>
+                    <td class="positive">6.2%</td>
+                    <td>$10,000.00</td>
+                    <td>$404.82B</td>
+                </tr>
+                <tr>
+                    <td>Tether <span class="ticker">USDT</span>
+                    <td>$1</td>
+                    <td class="positive">0.01%</td>
+                    <td class="positive">0.0%</td>
+                    <td>$150,000.00</td>
+                    <td>$73.19B</td>
+                </tr>
+                <tr>
+                    <td>Cardano <span class="ticker">ADA</span>
+                    <td>$2.152</td>
+                    <td class="positive">2.51%</td>
+                    <td class="positive">7.10%</td>
+                    <td>$120,000.00</td>
+                    <td>$68.84B</td>
+                </tr>
+                <tr>
+                    <td>Solana <span class="ticker">SOL</span>
+                    <td>$248.65</td>
+                    <td class="negative">1.24%</td>
+                    <td class="positive">2.15%</td>
+                    <td>$40,000.00</td>
+                    <td>$45.84B</td>
+                </tr>
+                <tr>
+                    <td>Ripple <span class="ticker">XRP</span>
+                    <td>$1.26</td>
+                    <td class="negative">0.46%</td>
+                    <td class="positive">2.18%</td>
+                    <td>$20,000.00</td>
+                    <td>$51.85B</td>
+                </tr>
+                <tr>
+                    <td>Polkadot <span class="ticker">DOT</span>
+                    <td>$45.24</td>
+                    <td class="positive">5.23%</td>
+                    <td class="positive">9.21%</td>
+                    <td>$60,000.00</td>
+                    <td>$43.85B</td>
+                </tr>
+                <tr>
+                    <td>Dogecoin <span class="ticker">DOGE</span>
+                    <td>$0.2851</td>
+                    <td class="negative">1.51%</td>
+                    <td class="negative">7.10%</td>
+                    <td>25,000.00</td>
+                    <td>$23.65B</td>
+                </tr>
+                <tr>
+                    <td>USD Coin <span class="ticker">USDC</span>
+                    <td>$2.152</td>
+                    <td class="positive">0.00%</td>
+                    <td class="negative">0.01%</td>
+                    <td>400,000.00</td>
+                    <td>$21.45B</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
